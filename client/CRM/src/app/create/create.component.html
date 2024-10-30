@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 border border-5">
+            <h3 class="title">Create Person</h3>
+            
+            <from class="row g-3" [formGroup]="personForm" (ngSubmit)="onSubmit()">
+                <div class="col-md-6">
+                    <label for="id" class="form-label">id</label>
+                    <input id="id" class="form-control" type="text" fromControlName="id" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="first-name" class="form-label">First Name</label>
+                    <input id="first-name" class="form-control" type="text" formControlName="firstName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="last-name" class="form-label">First Name</label>
+                    <input id="last-name" class="form-control" type="text" formControlName="lastName" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="email" class="form-label">First Name</label>
+                    <input id="email" class="form-control" type="text" formControlName="email" required>
+                </div>
+               <div class="col-md-12">
+                <button type="submit" class="btn btn-primary ms-1" (ngSubmit)="onSubmit()">Add</button>
+                <button type="submit" class="btn btn-primary ms-1" (click)="onclear()">Add</button>
+               </div>
+
+            </from>
+        </div>
+    </div>
+</div>
