@@ -2,6 +2,7 @@
 using CRM.DBContext;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace CRM
 {
@@ -22,11 +23,19 @@ namespace CRM
                             .AllowAnyMethod();
                     });
             });
+            builder.Services.AddDbContext<PersonDBContext>(options =>
+                                    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = builder.Configuration["RedisCacheServerUrl"]; 
+            });
+            builder.Services.AddMemoryCache();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-           
+            
+
             var app = builder.Build();
             app.UseCors("AllowAllOrigins");
             // Configure the HTTP request pipeline.
@@ -35,14 +44,15 @@ namespace CRM
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+          
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
 
             app.MapControllers();
-
+            app.UseRouting();
+         
             app.Run();
         }
     }

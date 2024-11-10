@@ -59,11 +59,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "port": 4200,
-             "host": "127.0.0.1",
-              "disableHostCheck": false,
-             "proxyConfig": "src/proxy.config.json" 
-          },
+                "buildTarget": "crm:build",
+                "proxyConfig": "src/proxy.config.json"
+            },
           "configurations": {
             "production": {
               "buildTarget": "CRM:build:production"
